@@ -38,8 +38,6 @@ export class HttpInterceptorService implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         if (!this.exemptedUris.includes(req.url) && vars.ENABLE_AUTH === true) {
-            console.log(this.auth.token);
-
             const newRequest = req.clone({
                 headers: req.headers.set('Authorization', this.auth.token || '')
             });

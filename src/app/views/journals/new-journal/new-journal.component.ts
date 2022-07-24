@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { TuiDialogService, TuiAlertService } from '@taiga-ui/core';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, tap } from 'rxjs';
 import { BaseAPIService } from 'src/app/shared/services';
 import { environment } from 'src/environments/environment';
 import { PreviewJournalSubmissionDialog } from '../dialogs/preview-journal-submission/preview-journal-submission.dialog';
@@ -28,32 +28,33 @@ export class NewJournalComponent implements OnInit {
     },
   ];
 
-  journalcategories = [
-    {
-      id: 1,
-      name: 'Animals',
-      img: '/assets/animals.jpg',
-      description: 'Animals category'
-    },
-    {
-      id: 2,
-      name: 'Education',
-      img: '/assets/education.png',
-      description: 'Education category'
-    },
-    {
-      id: 3,
-      name: 'Music',
-      img: '/assets/music.jpg',
-      description: 'Music category'
-    },
-    {
-      id: 4,
-      name: 'Religion',
-      img: '/assets/religion.png',
-      description: 'Religion category'
-    }
-  ];
+  journalcategories: any;
+  //  = [
+  //   {
+  //     id: 1,
+  //     name: 'Animals',
+  //     img: '/assets/animals.jpg',
+  //     description: 'Animals category'
+  //   },
+  //   {
+  //     id: 2,
+  //     name: 'Education',
+  //     img: '/assets/education.png',
+  //     description: 'Education category'
+  //   },
+  //   {
+  //     id: 3,
+  //     name: 'Music',
+  //     img: '/assets/music.jpg',
+  //     description: 'Music category'
+  //   },
+  //   {
+  //     id: 4,
+  //     name: 'Religion',
+  //     img: '/assets/religion.png',
+  //     description: 'Religion category'
+  //   }
+  // ];
   journalContent: string;
   addJournalForm: FormGroup;
   loading = false;
@@ -72,7 +73,7 @@ export class NewJournalComponent implements OnInit {
     private readonly alertService: TuiAlertService,) {
     this.addJournalForm = this.fb.group({
       Title: new FormControl(null, Validators.required),
-      Category: new FormControl(null, Validators.required),
+      CategoryID: new FormControl(null, Validators.required),
       Content: new FormControl(null, Validators.required)
     })
   }
@@ -81,7 +82,15 @@ export class NewJournalComponent implements OnInit {
     this.fetchCategories()
   }
   fetchCategories(): void {
-    this.$categories = this.api.listPaginated<any>(`${environment.API_HOST}`, `/categories`, { page: 1, page_size: 50 });
+    this.$categories = this.api.listPaginated<any>(`${environment.API_HOST}`, `/journal/category-list`, { pageNumber: 1, recordCount: 50 })
+      .pipe(
+        tap(
+          resp => {
+            this.journalcategories = [];
+            this.journalcategories = resp.results;
+          }
+        )
+      )
   }
 
   onPreview(): void {
@@ -96,16 +105,20 @@ export class NewJournalComponent implements OnInit {
     );
     this.dialog.subscribe({
       next: data => {
-        console.info(`Dialog emitted data = ${data}`);
       },
       complete: () => {
-        console.info('Dialog closed');
       },
     });
   }
 
   addJournal(): void {
-    this.$submitResp = this.api.post<any>(`${environment.API_HOST}`, `/journals`, this.addJournalForm.value);
+    this.$submitResp = this.api.post<any>(`${environment.API_HOST}`, `/journal`, this.addJournalForm.value)
+      .pipe(
+        tap(resp => {
+          this.alertService.open('SUccessfully added journal').subscribe();
+          this.router.navigate(['/views/journals']);
+        })
+      )
   }
   onCancel(): void {
     this.router.navigate(['/views/journals']);

@@ -41,7 +41,7 @@ export class JournalComponent implements OnInit {
     this.fetchJournal()
   }
   fetchJournal(): void {
-    this.$journal = this.api.fetch(`/journals/${this.journalId}`);
+    this.$journal = this.api.fetch(`/journal/${this.journalId}`);
   }
 
 }

@@ -16,9 +16,9 @@
                 </tui-input>
                 <!-- </tui-island> -->
             </div>
-            <div class="col-sm-12 col-md-4 col-lg-4">
-                <ng-select [items]="journalcategories" [searchable]="true" bindLabel="name" bindValue="id"
-                    placeholder="Journal Category" formControlName="Category">
+            <div class="col-sm-12 col-md-4 col-lg-4" *tuiLet="$categories|async">
+                <ng-select [items]="journalcategories" [searchable]="true" bindLabel="Name" bindValue="CategoryID"
+                    placeholder="Journal Category" formControlName="CategoryID">
                 </ng-select>
             </div>
         </div>

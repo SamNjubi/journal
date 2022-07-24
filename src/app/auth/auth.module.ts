@@ -60,7 +60,6 @@ import { GoogleLoginProvider, GoogleSigninButtonDirective, SocialAuthServiceConf
                     }
                 ],
                 onError: (err) => {
-                    console.error(err);
                 }
             } as SocialAuthServiceConfig,
         },

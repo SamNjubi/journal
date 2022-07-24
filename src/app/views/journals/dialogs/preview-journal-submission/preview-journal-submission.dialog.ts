@@ -21,8 +21,6 @@ export class PreviewJournalSubmissionDialog {
         this.today = new Date();
         this.journal = this.data[0];
         this.category = this.data[1];
-        console.log(this.journal);
-
     }
 
     get data(): any {

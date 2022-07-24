@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid pb-4">
     <div class="row" *tuiLet="$journals|async as journals">
         <div class="col-sm-12 col-md-8 col-lg-8">
             <tui-tabs [(activeItemIndex)]="activeItemIndex">
@@ -27,10 +27,10 @@
                     <img src="{{journal.CategoryImage}}" class="card-img-top" style="height: 11rem;" alt="...">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
-                            <h5 class="card-title">{{journal.Title}}</h5>
+                            <h5 class="card-title text-capitalize">{{journal.Title}}</h5>
                             <span class="text-muted">{{journal.CategoryName}}</span>
                         </div>
-                        <p class="card-text">{{journal.Content}}</p>
+                        <!-- <p class="card-text">{{journal.Content}}</p> -->
                         <div class="w-100 d-flex justify-content-start">
                             <a href="javascript:void(0)" class="btn btn-primary"
                                 [routerLink]="['/views/journals', journal.JournalID]">View</a>
@@ -39,8 +39,8 @@
                 </div>
             </div>
         </div>
-        <tui-table-pagination class="tui-space_top-2" [total]="total" (pageChange)="onPage($event)"
-            (sizeChange)="onSize($event)"></tui-table-pagination>
+        <!-- <tui-table-pagination class="tui-space_top-2" [total]="total" (pageChange)="onPage($event)"
+            (sizeChange)="onSize($event)"></tui-table-pagination> -->
     </tui-loader>
 
 </div>
