@@ -28,38 +28,37 @@ export class NewJournalComponent implements OnInit {
     },
   ];
 
-  journalcategories: any;
-  //  = [
-  //   {
-  //     id: 1,
-  //     name: 'Animals',
-  //     img: '/assets/animals.jpg',
-  //     description: 'Animals category'
-  //   },
-  //   {
-  //     id: 2,
-  //     name: 'Education',
-  //     img: '/assets/education.png',
-  //     description: 'Education category'
-  //   },
-  //   {
-  //     id: 3,
-  //     name: 'Music',
-  //     img: '/assets/music.jpg',
-  //     description: 'Music category'
-  //   },
-  //   {
-  //     id: 4,
-  //     name: 'Religion',
-  //     img: '/assets/religion.png',
-  //     description: 'Religion category'
-  //   }
-  // ];
+  journalcategories = [
+    {
+      CategoryID: 1,
+      Name: 'Animals',
+      img: '/assets/animals.jpg',
+      description: 'Animals category'
+    },
+    {
+      CategoryID: 2,
+      Name: 'Education',
+      img: '/assets/education.png',
+      description: 'Education category'
+    },
+    {
+      CategoryID: 3,
+      Name: 'Music',
+      img: '/assets/music.jpg',
+      description: 'Music category'
+    },
+    {
+      CategoryID: 4,
+      Name: 'Religion',
+      img: '/assets/religion.png',
+      description: 'Religion category'
+    }
+  ];
   journalContent: string;
   addJournalForm: FormGroup;
   loading = false;
   dialog: any;
-  selectedCategory: { id: number; name: string; img: string; description: string; }[];
+  selectedCategory: any;
   $categories = new BehaviorSubject<any>([]).asObservable();
   $submitResp = new BehaviorSubject<any>([]).asObservable();
 
@@ -82,19 +81,19 @@ export class NewJournalComponent implements OnInit {
     this.fetchCategories()
   }
   fetchCategories(): void {
-    this.$categories = this.api.listPaginated<any>(`${environment.API_HOST}`, `/journal/category-list`, { pageNumber: 1, recordCount: 50 })
-      .pipe(
-        tap(
-          resp => {
-            this.journalcategories = [];
-            this.journalcategories = resp.results;
-          }
-        )
-      )
+    // this.$categories = this.api.listPaginated<any>(`${environment.API_HOST}`, `/journal/category-list`, { pageNumber: 1, recordCount: 50 })
+    //   .pipe(
+    //     tap(
+    //       resp => {
+    //         this.journalcategories = [];
+    //         this.journalcategories = resp.results;
+    //       }
+    //     )
+    //   )
   }
 
   onPreview(): void {
-    this.selectedCategory = this.journalcategories.filter(val => val.id === this.addJournalForm.value.category);
+    this.selectedCategory = this.journalcategories.filter(val => val.CategoryID === this.addJournalForm.value.CategoryID);
     this.dialog = this.dialogService.open<number>(
       new PolymorpheusComponent(PreviewJournalSubmissionDialog, this.injector),
       {
@@ -112,13 +111,17 @@ export class NewJournalComponent implements OnInit {
   }
 
   addJournal(): void {
+    this.delay(2000);
+    this.alertService.open('Successfully added journal').subscribe();
+    this.router.navigate(['/views/journals']);
     this.$submitResp = this.api.post<any>(`${environment.API_HOST}`, `/journal`, this.addJournalForm.value)
       .pipe(
         tap(resp => {
-          this.alertService.open('SUccessfully added journal').subscribe();
-          this.router.navigate(['/views/journals']);
         })
       )
+  }
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
   onCancel(): void {
     this.router.navigate(['/views/journals']);

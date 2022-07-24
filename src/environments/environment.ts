@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   TITLE: 'journal',
-  API_HOST: 'http://3.238.107.235:5000',
+  API_HOST: 'https://3.238.107.235:5000',
   ENABLE_AUTH: true,
   PAGINATION_TYPE: `link`, // Options 'limit_offset' / 'link' / 'page_number'
 };

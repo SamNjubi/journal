@@ -39,14 +39,13 @@ export class LoginComponent implements OnInit {
     ngOnInit(): void {
         this.socialauthService.authState.subscribe(
             (resp: any) => {
-                // this.auth.saveUserSession(resp.idToken, resp, true);
+                this.auth.saveUserSession(resp.idToken, resp, true);
+                // this.http.get<any>(`${environment.API_HOST}/user?token=${resp.idToken}`, ).subscribe(
+                //     resp => {
+                //         this.auth.saveUserSession(resp.JWTToken, resp, true);
 
-                this.http.get<any>(`${environment.API_HOST}/user?token=${resp.idToken}`, ).subscribe(
-                    resp => {
-                        this.auth.saveUserSession(resp.JWTToken, resp, true);
-
-                    }
-                )
+                //     }
+                // )
             }
         )
     }

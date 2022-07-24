@@ -9,16 +9,16 @@
     <tui-island style="height: 80vh; overflow: auto">
         <div class="row">
             <div class="col-sm-12 col-md-8 col-lg-8">
-                <h5> <span class="text-muted">Title:</span> {{($journal|async).Title}}</h5>
+                <h5> <span class="text-muted">Title:</span> {{journal.Title}}</h5>
                 <div class="row">
                     <div class="col-sm-12 col-md-6 col-lg-6">
                         <!-- <p class="text-muted mb-1">Submitted on:</p> -->
-                        <p> {{($journal|async).CreatedAt | date:'medium'}} </p>
+                        <p> {{journal.CreatedAt | date:'medium'}} </p>
                     </div>
                 </div>
             </div>
             <div class="col-sm-12 col-md-4 col-lg-4">
-                <img src="{{($journal|async).CategoryImage}}" style="width: 10rem;" alt="">
+                <img src="{{journal.CategoryImage}}" style="width: 10rem;" alt="">
             </div>
         </div>
 
