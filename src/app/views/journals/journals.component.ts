@@ -81,7 +81,7 @@ export class JournalsComponent implements OnInit {
     this.alertService.open(item).subscribe();
   }
   ngOnInit(): void {
-    // this.fetchJournals();
+    this.fetchJournals();
   }
   fetchJournals(): void {
     this.$journals = this.api.listPaginated<any>(`${environment.API_HOST}`, `/journal/list`, { pageNumber: this.currentPage, recordCount: this.currentSize });

@@ -37,6 +37,7 @@ import { TuiLetModule } from '@taiga-ui/cdk';
     TuiInputCountModule,
     TuiSvgModule,
     TuiLoaderModule,
+    TuiLetModule,
     TuiTablePaginationModule,
     TuiLineClampModule,
     TuiIslandModule,

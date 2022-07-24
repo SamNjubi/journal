@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="row">
+    <div class="row" *tuiLet="$journals|async as journals">
         <div class="col-sm-12 col-md-8 col-lg-8">
             <tui-tabs [(activeItemIndex)]="activeItemIndex">
                 <button tuiTab (click)="onClick('My journals')">
