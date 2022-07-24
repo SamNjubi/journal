@@ -1,0 +1,45 @@
+<div style="height: 85vh;" *tuiLet="$submitResp|async as resp">
+    <tui-breadcrumbs>
+        <ng-container *ngFor="let item of breadcrumbitems">
+            <a *tuiBreadcrumb tuiLink [routerLink]="item.routerLink">
+                {{ item.caption }}
+            </a>
+        </ng-container>
+    </tui-breadcrumbs>
+    <form [formGroup]="addJournalForm">
+        <div class="row">
+            <div class="col-sm-12 col-md-8 col-lg-8">
+                <!-- <tui-island> -->
+                <tui-input tuiHintContent="Type your journal title" class="b-form" [tuiTextfieldCleaner]="true"
+                    tuiTextfieldSize="m" formControlName="title">
+                    Add Journal Title Here
+                </tui-input>
+                <!-- </tui-island> -->
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4">
+                <ng-select [items]="journalcategories" [searchable]="true" bindLabel="name" bindValue="id"
+                    placeholder="Journal Category" formControlName="category">
+                </ng-select>
+            </div>
+        </div>
+        <div class="mt-4">
+            <tui-editor i18n exampleText="Describe your journal" class="editor" formControlName="content">
+                Journal content here
+            </tui-editor>
+        </div>
+    </form>
+    <div style="margin-top: 2rem; display: list-item; list-style: none;" class="text-center">
+        <button tuiButton type="button" appearance="secondary" class="tui-space_right-3 tui-space_bottom-3"
+            (click)="onPreview()">
+            View Summary
+        </button>
+        <button tuiButton type="button" appearance="primary" class="tui-space_right-3 tui-space_bottom-3"
+            [disabled]="loading || addJournalForm.invalid" [showLoader]="loading" (click)="addJournal()">
+            Submit
+        </button>
+        <button tuiButton type="button" appearance="outline secondary" class="tui-space_right-3 tui-space_bottom-3"
+            [routerLink]="['views/journals']">
+            Cancel
+        </button>
+    </div>
+</div>

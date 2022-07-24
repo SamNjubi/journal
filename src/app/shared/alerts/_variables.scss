@@ -1,0 +1,52 @@
+// Toasts
+$toast-message-a-hover-color: #ccc !default;
+$toast-close-button-right: -0.3em !default;
+$toast-close-button-top: $toast-close-button-right !default;
+$toast-close-button-font-size: 1.25rem !default;
+$toast-close-button-text-shadow: 0 1px 0 !default;
+$toast-close-button-opacity: 0.8 !default;
+$toast-close-button-filter: alpha(opacity=80) !default;
+$toast-close-button-hover-opacity: 0.4 !default;
+$toast-close-button-hover-filter: alpha(opacity=40) !default;
+$toast-top-bottom-left-right-size: 12px !default;
+$toast-container-margin: 6px !default;
+$toast-container-py: 15px !default;
+$toast-container-pr: $toast-container-py !default;
+$toast-container-pl: 50px !default;
+$toast-container-width: 18.75rem !default;
+$toast-container-opacity: 0.95 !default;
+$toast-container-filter: alpha(opacity=95) !default;
+$toast-container-hover-transition: 0.45s !default;
+$toast-container-hover-opacity: 1 !default;
+$toast-container-hover-filter: alpha(opacity=100) !default;
+$toast-container-top-full-width: 96% !default;
+$toast-bgc: #030303 !default;
+$toast-progress-height: 4px !default;
+$toast-progress-opacity: 0.4 !default;
+$toast-progress-filter: alpha(opacity=40) !default;
+
+// colors
+$primary-color: #291341 !default;
+$primary-color-dark: #200532 !default;
+$secondary-color: #aa66cc !default;
+$secondary-color-dark: #9933cc !default;
+$default-color: #2bbbad !default;
+$default-color-dark: #00695c !default;
+$info-color: #33b5e5 !default;
+$info-color-dark: #0099cc !default;
+$success-color: #00c851 !default;
+$success-color-dark: #007e33 !default;
+$warning-color: #ffbb33 !default;
+$warning-color-dark: #ff8800 !default;
+$danger-color: #ff3547 !default;
+$danger-color-dark: #cc0000 !default;
+$white-base: #fff !default;
+$black-base: #000 !default;
+
+// Shadows
+$z-depth-1: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12) !default;
+//$z-depth-1-half: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15) !default;
+$z-depth-2: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !default;
+//$z-depth-3: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19) !default;
+//$z-depth-4: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21) !default;
+//$z-depth-5: 0 27px 24px 0 rgba(0, 0, 0, 0.2), 0 40px 77px 0 rgba(0, 0, 0, 0.22) !default;

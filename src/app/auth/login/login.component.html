@@ -1,0 +1,63 @@
+<div class="container-fluid vh-100">
+    <div class="col d-flex justify-content-center align-items-center h-100">
+        {{$loginResp|async}}
+        <tui-island size="l" textAlign="center" class="shadow">
+            <img src="assets/journal-icon.png" alt="" loading="lazy" style="height: 6rem;" class="pt-4 mb-2">
+            <h4>Sign in to your account</h4>
+            <hr>
+            <img src="assets/writer.svg" style="height: 10rem;" alt="">
+            <button tuiButton appearance="secondary" class="mt-4">
+                <!-- <img src="assets/google-icon-1.png" style="height: 1.5rem; margin-right: 1rem;" alt=""> -->
+                <asl-google-signin-button #googleBtnRef>Google</asl-google-signin-button>
+                <span class="ms-2"> Sign In with Google </span>
+            </button>
+            <hr>
+            <!-- <form [formGroup]="loginForm" class="mt-4 mx-4" style="min-width: 25rem;">
+                <div class="mb-3">
+                    <tui-input class="b-form" formControlName="username" tuiHintContent="Your org email address"
+                        [tuiTextfieldCleaner]="true">
+                        Username
+                        <span class="tui-required"></span>
+                        <input tuiTextfield type="email" style="-webkit-box-shadow: none !important;" />
+                    </tui-input>
+                    <tui-error formControlName="username" [error]="[] | tuiFieldError |async"></tui-error>
+                </div>
+                <div class="mb-4">
+                    <tui-input-password formControlName="password" tuiTextfieldSize="m" class="tui-space_top-2"
+                        [tuiTextfieldCleaner]="true">
+                        Password
+                        <span class="tui-required"></span>
+                        <input tuiTextfield placeholder="Make it secure!"
+                            style="-webkit-box-shadow: none !important;" />
+                    </tui-input-password>
+                    <tui-error formControlName="password" [error]="[] | tuiFieldError |async"></tui-error>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <tui-checkbox-labeled formControlName="rememberme" size="l"
+                        style="-webkit-box-shadow: none !important;">
+                        <p>Remember me</p>
+                    </tui-checkbox-labeled>
+                    <p>
+                        <a href="javascript:void(0)" class="forgot-pwd" [routerLink]="['/auth/password']"> Forgot
+                            password? </a>
+                    </p>
+                </div>
+                <button tuiButton type="submit" size="m" class="tui-space_right-3 tui-space_bottom-3 tui-space_top-5"
+                    iconRight="tuiIconArrowRight" [showLoader]="loading" [disabled]="loading || loginForm.invalid">
+                    Sign in
+                </button>
+                <p>Don't have an account? <a href="javascript:void(0)" [routerLink]="['/auth/register']"> Register </a>
+                    today.</p>
+
+            </form> -->
+        </tui-island>
+    </div>
+</div>
+
+<ng-template #loginTemplate>
+    <p i18n>Your account is now registered, please check your email for a link to set your password.</p>
+    <button tuiButton type="button" tuiMode="onLight" appearance="outline" size="m"
+        [routerLink]="['/auth/confirm_password']">
+        Set Password&nbsp;
+    </button>
+</ng-template>

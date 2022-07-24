@@ -1,0 +1,57 @@
+<nav class="navbar navbar-expand-lg bg-dark sticky-top">
+    <div class="container-fluid">
+        <img src="assets/journal-icon.png" alt="" loading="lazy" height="50" class="navbar-brand ms-4">
+        <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="nav navbar-nav ms-4 w-100">
+                <li *ngFor="let route of topRoutes" class="nav-item" style="cursor: pointer;">
+                    <h5 class="nav-link mb-0" [ngClass]="currenturl === route.name ? 'active' : ''"
+                        [routerLink]="route.path">
+                        <span *ngIf="route.icon" class="{{ route.icon }} me-2"></span>
+                        <span class="text text-white" style="text-transform: capitalize" *ngIf="route.icon">{{
+                            route.name }}</span>
+                    </h5>
+                </li>
+            </ul>
+            <ul class="mb-1">
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-end" *ngIf="!auth.isLoggedIn()" [routerLink]="['/auth/login']"
+                        [routerLinkActive]="'active'">
+                        <span class="text text-white me-2">Login</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z" />
+                            <path fill-rule="evenodd"
+                                d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
+                        </svg>
+                    </a>
+                </li>
+                <li class="dropdown nav-item" *ngIf="auth.isLoggedIn()">
+                    <a class="nav-link dropdown-toggle text-white" id="authDropdownMenu" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="icons icon-person-fill"></i>
+                        <span style="margin: 0 5px">Samuel</span>
+                        <span style="margin: 0 5px"> Macharia</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="authDropdownMenu">
+                        <li class="dropdown-header">My Profile</li>
+                        <li>
+                            <a class="dropdown-item" [routerLink]="'/profile'"><i class="icons icon-person-square"></i>
+                                Samuel Macharia
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" (click)="auth.logout()"><i
+                                    class="icons icon-arrow-left-circle-fill"></i>
+                                Logout</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,17 @@
+<div>
+    <h5> <span class="text-muted">Title:</span> {{journal.Title}}</h5>
+    <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-6">
+            <p class="text-muted mb-1">Submitted on:</p>
+            <p> {{today | date:'medium'}} </p>
+        </div>
+    </div>
+
+    <tui-editor-socket [content]="journal.Content"></tui-editor-socket>
+    <div class="w-100 d-flex justify-content-center mt-4">
+        <button tuiButton type="button" appearance="primary" class="tui-space_right-3 tui-space_bottom-3" size="m"
+            (click)="onDone()">
+            Done
+        </button>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+.app-header-toggle {
+    background: transparent;
+    border: 0.10rem solid #ffffff;
+    border-left: 0;
+    border-right: 0;
+    cursor: pointer;
+    font-size: 0;
+    height: 0.9rem;
+    margin-right: .5rem;
+    position: relative;
+    width: 1.4rem;
+
+    &::after {
+        background: #ffffff;
+        position: absolute;
+        margin-top: -0.075rem;
+        height: 0.12rem;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        content: '';
+    }
+}
+
+h3 {
+    color: orange;
+}
+.navbar-nav {
+    list-style: none;
+}
