@@ -1,5 +1,6 @@
 import { Component, Inject, Injector, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { TuiDialogService, TuiAlertService } from '@taiga-ui/core';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 import { BehaviorSubject } from 'rxjs';
@@ -64,14 +65,15 @@ export class NewJournalComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private api: BaseAPIService,
+    private router: Router,
     @Inject(TuiDialogService) private readonly dialogService: TuiDialogService,
     @Inject(Injector) private readonly injector: Injector,
     @Inject(TuiAlertService)
     private readonly alertService: TuiAlertService,) {
     this.addJournalForm = this.fb.group({
-      title: new FormControl(null, Validators.required),
-      category: new FormControl(null, Validators.required),
-      content: new FormControl(null, Validators.required)
+      Title: new FormControl(null, Validators.required),
+      Category: new FormControl(null, Validators.required),
+      Content: new FormControl(null, Validators.required)
     })
   }
 
@@ -103,8 +105,10 @@ export class NewJournalComponent implements OnInit {
   }
 
   addJournal(): void {
-    console.log(this.addJournalForm.value);
     this.$submitResp = this.api.post<any>(`${environment.API_HOST}`, `/journals`, this.addJournalForm.value);
+  }
+  onCancel(): void {
+    this.router.navigate(['/views/journals']);
   }
 
 }

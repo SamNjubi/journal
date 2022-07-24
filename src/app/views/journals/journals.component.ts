@@ -42,14 +42,14 @@ export class JournalsComponent implements OnInit {
       JournalID: 1,
       Title: 'A title one',
       Content: 'Content here',
-      CategoryName: 'Religion',
+      CategoryName: 'Education',
       CategoryImage: '/assets/education.png'
     },
     {
       JournalID: 2,
       Title: 'A title two',
       Content: 'Content here',
-      CategoryName: 'Religion',
+      CategoryName: 'Animals',
       CategoryImage: '/assets/animals.jpg'
     },
     {
@@ -63,7 +63,7 @@ export class JournalsComponent implements OnInit {
       JournalID: 4,
       Title: 'A title four',
       Content: 'Content here',
-      CategoryName: 'Religion',
+      CategoryName: 'Music',
       CategoryImage: '/assets/music.jpg'
     }
   ];

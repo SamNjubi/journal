@@ -2,12 +2,12 @@
     <div class="row">
         <div class="col-sm-12 col-md-8 col-lg-8">
             <tui-tabs [(activeItemIndex)]="activeItemIndex">
-                <button tuiTab (click)="onClick('Maps')">
+                <button tuiTab (click)="onClick('My journals')">
                     <tui-svg src="tuiIconCard" class="tui-space_right-2"></tui-svg>
                     My Journals
                 </button>
-                <button tuiTab (click)="onClick('Settings')">
-                    <tui-svg src="tuiIconSettings" class="tui-space_right-2"></tui-svg>
+                <button tuiTab (click)="onClick('Shared')">
+                    <tui-svg src="tuiIconRedoLarge" class="tui-space_right-2"></tui-svg>
                     Shared Journals
                 </button>
             </tui-tabs>
@@ -23,15 +23,18 @@
     <tui-loader [overlay]="true" [showLoader]="!!loading">
         <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4">
             <div class="col" *ngFor="let journal of myjournals; let l=index">
-                <div class="card" style="width: 18rem;">
-                    <img src="{{journal.CategoryImage}}" class="card-img-top" style="max-height: 11rem;" alt="...">
+                <div class="card" style="width: 18rem; height: 20rem; overflow:auto">
+                    <img src="{{journal.CategoryImage}}" class="card-img-top" style="height: 11rem;" alt="...">
                     <div class="card-body">
-                        <div class="d-flex">
+                        <div class="d-flex justify-content-between">
                             <h5 class="card-title">{{journal.Title}}</h5>
                             <span class="text-muted">{{journal.CategoryName}}</span>
                         </div>
                         <p class="card-text">{{journal.Content}}</p>
-                        <a href="#" class="btn btn-primary" [routerLink]="['/views/journals', journal.JournalID]">View</a>
+                        <div class="w-100 d-flex justify-content-start">
+                            <a href="javascript:void(0)" class="btn btn-primary"
+                                [routerLink]="['/views/journals', journal.JournalID]">View</a>
+                        </div>
                     </div>
                 </div>
             </div>
