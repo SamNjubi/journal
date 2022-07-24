@@ -13,10 +13,8 @@ import { AuthService } from './auth.service';
 
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { LoginResponse } from '../models';
 import { environment as vars } from '../../../environments/environment';
 import { TuiAlertService, TuiNotification } from '@taiga-ui/core';
-import { environment } from 'src/environments/environment';
 
 
 @Injectable()
@@ -30,18 +28,18 @@ export class HttpInterceptorService implements HttpInterceptor {
         private http: HttpClient,
         private auth: AuthService,
         private alertService: TuiAlertService) {
-        const loginUrl = vars.AUTH_BACKEND.TOKEN.default ? vars.AUTH_BACKEND.TOKEN.AUTH_ENDPOINT :
-            vars.AUTH_BACKEND.JWT.AUTH_LOGIN_ENDPOINT;
-        const loginEndpoint = `${environment.API_HOST}${loginUrl}`;
-        this.exemptedUris = [
-            loginEndpoint
-        ];
+        // const loginUrl = vars.AUTH_BACKEND.TOKEN.default ? vars.AUTH_BACKEND.TOKEN.AUTH_ENDPOINT :
+        //     vars.AUTH_BACKEND.JWT.AUTH_LOGIN_ENDPOINT;
+        // const loginEndpoint = `${environment.API_HOST}${loginUrl}`;
+        // this.exemptedUris = [
+        //     loginEndpoint
+        // ];
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         if (!this.exemptedUris.includes(req.url) && vars.ENABLE_AUTH === true) {
             const newRequest = req.clone({
-                headers: req.headers.set('Authorization', `${vars.AUTH_BACKEND.AUTH_HEADER_PREFIX} ` + this.auth.token || '')
+                headers: req.headers.set('Authorization', this.auth.token || '')
             });
             return next.handle(newRequest).pipe(tap((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
@@ -66,22 +64,8 @@ export class HttpInterceptorService implements HttpInterceptor {
                             this.alertService.open(JSON.stringify(err.error), { label: `Input Error!! ${err.status}`, status: TuiNotification.Warning, autoClose: false }).subscribe();
                         }
                     } else if (err.status === 401) {
-                        if (vars.AUTH_BACKEND.JWT.default) {
-                            this.http.post<LoginResponse>(vars.AUTH_BACKEND.JWT.TOKEN_REFRESH_ENDPOINT, {
-                                key: this.auth.token
-                            }).subscribe(
-                                tokenResp => {
-                                    this.auth.updateToken(tokenResp.token);
-                                },
-                                (error: HttpErrorResponse) => {
-                                    this.alertService.open(`${this.error401}. ${error.statusText}`, { label: `Authorization Error! ${err.status}`, status: TuiNotification.Warning, autoClose: false }).subscribe();
-                                    this.auth.logout();
-                                }
-                            );
-                        } else {
-                            this.alertService.open(`${this.error401}`, { label: `Authorization Error! ${err.status}`, status: TuiNotification.Warning, autoClose: false }).subscribe();
-                            this.auth.logout();
-                        }
+                        this.auth.logout();
+                        this.alertService.open(`${this.error401}`, { label: `Authorization Error! ${err.status}`, status: TuiNotification.Warning, autoClose: false }).subscribe();
                     } else if (err.status === 403) {
                         this.alertService.open(`Sorry, you are required to login to perform this action. ${err.statusText}`, { label: `Authorization Error! ${err.status}`, status: TuiNotification.Warning, autoClose: false }).subscribe();
                     } else if (err.status === 404) {

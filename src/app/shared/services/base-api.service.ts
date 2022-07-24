@@ -47,7 +47,7 @@ export class BaseAPIService {
     }
 
     public listPaginated<T>(host, url: string, queryParams?: { [key: string]: any }): Observable<PagedResponse<T>> {
-        const PAGE_SIZE = queryParams?.['page_size'] || vars.PAGE_SIZE;
+        const PAGE_SIZE = queryParams?.['page_size'] || 10;
         // TODO: Optimize logic
         if (vars.PAGINATION_TYPE === 'link') {
             return this.listResponse<T>(url, queryParams).pipe(

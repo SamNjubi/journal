@@ -7,19 +7,15 @@ import { AuthRoutingModule } from './auth-routing.module';
 
 import { AuthComponent } from './auth.component';
 import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { PasswordComponent } from './password/password.component';
-import { ConfirmPasswordComponent } from './confirm-password/confirm-password.component';
 
 import { TuiButtonModule, TuiDataListModule, TuiErrorModule, TuiHintModule, TuiLoaderModule, TuiSvgModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
 import { TuiCheckboxLabeledModule, TuiDataListWrapperModule, TuiFieldErrorPipeModule, TuiInputModule, TuiInputPasswordModule, TuiIslandModule, TuiSelectModule } from '@taiga-ui/kit';
 import { TuiLetModule } from '@taiga-ui/cdk';
-import { SharedModule } from '../shared/shared.module';
 import { GoogleLoginProvider, GoogleSigninButtonDirective, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 
 @NgModule({
     declarations: [
-        AuthComponent, LoginComponent, RegisterComponent, PasswordComponent, ConfirmPasswordComponent
+        AuthComponent, LoginComponent
     ],
     imports: [
         CommonModule,
